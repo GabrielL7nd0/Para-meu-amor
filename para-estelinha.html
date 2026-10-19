@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Estelinha 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: sans-serif;
+      background: #f3e9dc;
+      color: #6b4226;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 10px 30px;
+      margin: 10px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    #sim {
+      background: #b5652e;
+      color: #fdf8f2;
+    }
+
+    #nao {
+      background: #e6d5c3;
+      color: #b5652e;
+    }
+  </style>
+</head>
+<body>
+  <div id="pergunta">
+    <p>Estelinha, você é a pessoa mais especial da minha vida...</p>
+    <h1>Você quer ser meu amor pra sempre?</h1>
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <h1 id="resposta" hidden>Eu sabia! Te amo, meu amor! 💖</h1>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script>
+    const sim = document.getElementById("sim");
+    const nao = document.getElementById("nao");
+
+    function fugir(x, y) {
+      let left, top, tentativas = 0;
+      do {
+        left = Math.random() * (innerWidth - nao.offsetWidth);
+        top = Math.random() * (innerHeight - nao.offsetHeight);
+      } while (Math.hypot(left - x, top - y) < 150 && ++tentativas < 50);
+
+      nao.style.position = "fixed";
+      nao.style.left = left + "px";
+      nao.style.top = top + "px";
+    }
+
+    document.addEventListener("mousemove", (e) => {
+      const r = nao.getBoundingClientRect();
+      const distancia = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+      if (distancia < 100) fugir(e.clientX, e.clientY);
+    });
+
+    nao.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      fugir(e.touches[0].clientX, e.touches[0].clientY);
+    });
+
+    nao.addEventListener("click", (e) => fugir(e.clientX, e.clientY));
+
+    sim.addEventListener("click", () => {
+      document.getElementById("pergunta").hidden = true;
+      document.getElementById("resposta").hidden = false;
+      confetti({ particleCount: 200, spread: 90 });
+    });
+  </script>
+</body>
+</html>
