@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: sans-serif;
+  background: #f3e9dc;
+  color: #6b4226;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 10px 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#sim {
+  background: #b5652e;
+  color: #fdf8f2;
+}
+
+#nao {
+  background: #e6d5c3;
+  color: #b5652e;
+}
